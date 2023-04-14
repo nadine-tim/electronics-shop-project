@@ -1,6 +1,7 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
 from src.item import Item
+import csv
 
 
 class TestItem:
@@ -32,3 +33,19 @@ class TestItem:
 
     def test_string_to_number(self):
         assert Item.string_to_number('5.0') == 5
+
+    def test_instantiate_from_csv(cls):
+        Item.all = []
+        test_item = [{"name": "Смартфон", "price": "100", "quantity": "1"},
+                     {"name": "Ноутбук", "price": "1000", "quantity": "3"},
+                     {"name": "Кабель", "price": "10", "quantity": "5"},
+                     {"name": "Мышка", "price": "50", "quantity": "5"},
+                     {"name": "Клавиатура", "price": "75", "quantity": "5"}]
+        with open("../src/items.csv", 'r', encoding='WINDOWS-1251') as csvfile:
+            reader = csv.DictReader(csvfile, delimiter=",")
+            i = 0
+            for dct in reader:
+                assert test_item[i]['name'] == dct['name']
+                assert test_item[i]['price'] == dct['price']
+                assert test_item[i]['quantity'] == dct['quantity']
+                i += 1
