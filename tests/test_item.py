@@ -10,6 +10,14 @@ class TestItem:
     def item(self):
         return Item("Test Item", 10.0, 2)
 
+    def test_repr(self):
+        item1 = Item("Смартфон", 10000, 20)
+        assert repr(item1) == "Item('Смартфон', 10000, 20)"
+
+    def test_str(self):
+        item1 = Item("Смартфон", 10000, 20)
+        assert str(item1) == 'Смартфон'
+
     def test_item_initialization(self, item):
         assert item.name == "Test Item"
         assert item.price == 10.0
