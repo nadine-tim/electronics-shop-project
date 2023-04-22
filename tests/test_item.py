@@ -1,6 +1,7 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
 from src.item import Item
+from src.phone import Phone
 import csv
 
 
@@ -57,3 +58,9 @@ class TestItem:
                 assert test_item[i]['price'] == dct['price']
                 assert test_item[i]['quantity'] == dct['quantity']
                 i += 1
+
+    def test_add(self):
+        item1 = Item("Смартфон", 10000, 20)
+        phone1 = Phone("iPhone 14", 120_000, 5, 2)
+        assert item1 + phone1 == 25
+        assert phone1 + phone1 == 10

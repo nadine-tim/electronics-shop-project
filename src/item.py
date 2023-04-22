@@ -64,3 +64,8 @@ class Item:
     @staticmethod
     def string_to_number(number: str):
         return math.floor(float(number))
+
+    def __add__(self, other):
+        from src.phone import Phone
+        if isinstance(other, Phone):
+            return int(self.quantity) + int(other.quantity)
