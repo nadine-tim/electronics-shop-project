@@ -66,6 +66,5 @@ class Item:
         return math.floor(float(number))
 
     def __add__(self, other):
-        from src.phone import Phone
-        if isinstance(other, Phone):
+        if isinstance(other, Item):
             return int(self.quantity) + int(other.quantity)
