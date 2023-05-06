@@ -2,6 +2,7 @@
 import pytest
 from src.item import Item
 from src.phone import Phone
+from src.InstantiateCSVError import InstantiateCSVError
 import csv
 
 
@@ -64,3 +65,12 @@ class TestItem:
         phone1 = Phone("iPhone 14", 120_000, 5, 2)
         assert item1 + phone1 == 25
         assert phone1 + phone1 == 10
+
+    def test_instantiate_from_csv_exceptions(cls):
+        Item.source = "../src/broken_items.csv"
+        with pytest.raises(InstantiateCSVError):
+            Item.instantiate_from_csv()
+
+        source = "../src/no_items.csv"
+        Item.source = source
+        assert Item.instantiate_from_csv() == print(f"Отсутствует файл {source}")
