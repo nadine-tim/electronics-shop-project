@@ -1,5 +1,7 @@
 import csv
 import math
+import os
+
 from src.InstantiateCSVError import InstantiateCSVError
 
 
@@ -60,6 +62,8 @@ class Item:
     def instantiate_from_csv(cls):
         Item.all = []
         try:
+            if not os.path.exists(cls.source):
+                raise FileNotFoundError
             with open(cls.source, 'r', encoding='WINDOWS-1251') as csvfile:
                 reader = csv.DictReader(csvfile, delimiter=",")
                 for dct in reader:
